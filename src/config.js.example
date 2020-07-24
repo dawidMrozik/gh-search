@@ -1,0 +1,3 @@
+const token = 'INSERT YOUR GITHUB TOKEN HERE'
+
+export default token
