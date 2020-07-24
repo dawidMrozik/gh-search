@@ -1,7 +1,8 @@
 import React from 'react'
+import App from '../components/App'
 
 const Home = () => {
-  return <h1>Github repos search</h1>
+  return <App />
 }
 
 export default Home
