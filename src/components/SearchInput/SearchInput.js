@@ -1,14 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 const SearchInput = ({repos, setFilteredRepos}) => {
   const [query, setQuery] = useState('')
 
-  const handleChange = (e) => {
-    const userInput = e.target.value
-    setQuery(userInput)
-
-    if (userInput !== '') {
+  useEffect(() => {
+    if (query !== '') {
       const newRepos = repos.filter((repo) => {
         return repo.name.toLowerCase().includes(query.toLowerCase())
       })
@@ -17,6 +14,11 @@ const SearchInput = ({repos, setFilteredRepos}) => {
     } else {
       setFilteredRepos(repos)
     }
+  }, [query, repos, setFilteredRepos])
+
+  const handleChange = (e) => {
+    const userInput = e.target.value
+    setQuery(userInput)
   }
 
   return (
