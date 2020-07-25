@@ -13,6 +13,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}] // allow jsx in .js files
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}], // allow jsx in .js files
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}] // prop-types not listed in project's dependencies fix
   }
 }
