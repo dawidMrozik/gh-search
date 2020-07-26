@@ -1,0 +1,33 @@
+.UserInfo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  color: var(--clr-dark);
+}
+
+.UserInfo-img {
+  border-radius: 50%;
+  margin-bottom: 1.5em;
+  width: 75vw;
+  max-width: 300px;
+}
+
+.UserInfo-name {
+  margin: 0;
+  font-weight: 500;
+}
+
+.UserInfo-login {
+  margin: 0;
+  font-weight: 300;
+}
+
+.UserInfo-bio {
+  margin-top: 0.5em;
+  text-align: center;
+  padding: 0 1.5em;
+  line-height: 1.5;
+  font-size: 0.75em;
+}

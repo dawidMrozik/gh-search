@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './FetchMoreButton.css'
+
 const updateQuery = (previousResult, {fetchMoreResult}) => {
   if (!fetchMoreResult) {
     return previousResult
@@ -22,16 +24,20 @@ const updateQuery = (previousResult, {fetchMoreResult}) => {
   }
 }
 
-const FetchMoreButton = ({fetchMore, startCursor}) => {
+const FetchMoreButton = ({fetchMore, endCursor}) => {
   const loadMoreRepos = () => {
     fetchMore({
-      variables: {startCursor},
+      variables: {endCursor},
       updateQuery,
     })
   }
 
   return (
-    <button type="button" onClick={loadMoreRepos}>
+    <button
+      type="button"
+      className="FetchMoreButton-btn"
+      onClick={loadMoreRepos}
+    >
       Load more
     </button>
   )
@@ -39,7 +45,7 @@ const FetchMoreButton = ({fetchMore, startCursor}) => {
 
 FetchMoreButton.propTypes = {
   fetchMore: PropTypes.func.isRequired,
-  startCursor: PropTypes.string.isRequired,
+  endCursor: PropTypes.string.isRequired,
 }
 
 export default FetchMoreButton

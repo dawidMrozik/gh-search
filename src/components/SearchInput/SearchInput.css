@@ -1,0 +1,13 @@
+.SearchInput-input {
+  width: 100%;
+  padding: 0.8em 1em;
+  border: 1px solid #ddd;
+  border-radius: 0.4em;
+  outline: none;
+  margin-bottom: 1em;
+}
+
+.SearchInput-input:focus {
+  border: 1px solid var(--clr-accent);
+  box-shadow: 0 0 2px 2px rgba(43, 117, 237, 0.5);
+}

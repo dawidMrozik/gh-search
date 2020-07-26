@@ -1,18 +1,38 @@
 import React from 'react'
 import {useQuery, gql} from '@apollo/client'
-import Search from '../Search'
 
-const GET_REPOS_QUERY = gql`
-  query GetRepositories($startCursor: String) {
+import Search from '../Search'
+import UserInfo from '../UserInfo'
+import Loader from '../Loader'
+import Error from '../Error'
+
+const GET_USER_INFO_QUERY = gql`
+  query GetRepositories($endCursor: String) {
     viewer {
-      repositories(last: 10, before: $startCursor) {
+      login
+      avatarUrl
+      name
+      bio
+      repositories(
+        first: 10
+        after: $endCursor
+        orderBy: {field: UPDATED_AT, direction: DESC}
+      ) {
         pageInfo {
-          startCursor
-          hasPreviousPage
+          endCursor
+          hasNextPage
         }
         nodes {
           id
           name
+          updatedAt
+          shortDescriptionHTML
+          isPrivate
+          url
+          primaryLanguage {
+            color
+            name
+          }
         }
       }
     }
@@ -20,14 +40,23 @@ const GET_REPOS_QUERY = gql`
 `
 
 const App = () => {
-  const {loading, error, data, fetchMore} = useQuery(GET_REPOS_QUERY, {
+  const {loading, error, data, fetchMore} = useQuery(GET_USER_INFO_QUERY, {
     notifyOnNetworkStatusChange: true,
   })
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+  if (loading) return <Loader />
+  if (error) return <Error error={error} />
 
-  return <Search data={data} fetchMore={fetchMore} />
+  const {
+    viewer: {repositories, ...userInfo},
+  } = data
+
+  return (
+    <>
+      <UserInfo userInfo={userInfo} />
+      <Search repositories={repositories} fetchMore={fetchMore} />
+    </>
+  )
 }
 
 export default App

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
+import './SearchInput.css'
+
 const SearchInput = ({repos, setFilteredRepos}) => {
   const [query, setQuery] = useState('')
 
@@ -22,10 +24,14 @@ const SearchInput = ({repos, setFilteredRepos}) => {
   }
 
   return (
-    <label htmlFor="search">
-      Search repositories
-      <input type="text" id="search" value={query} onChange={handleChange} />
-    </label>
+    <input
+      className="SearchInput-input"
+      placeholder="Find a repository..."
+      aria-label="Find a repository..."
+      type="search"
+      value={query}
+      onChange={handleChange}
+    />
   )
 }
 

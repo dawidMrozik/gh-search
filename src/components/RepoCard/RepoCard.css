@@ -1,0 +1,61 @@
+.RepoCard-container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+  padding: 1em 0;
+}
+
+.RepoCard-name {
+  text-decoration: none;
+  color: var(--clr-accent);
+  font-weight: 600;
+  font-size: 1.25em;
+}
+
+.RepoCard-header {
+  display: flex;
+  align-items: center;
+}
+
+.RepoCard-privateBadge {
+  border-radius: 1em;
+  padding: 0 0.5em;
+  border: 1px solid #ddd;
+  font-size: 0.85em;
+  color: var(--clr-dark);
+  margin-left: 1em;
+}
+
+.RepoCard-desc {
+  color: var(--clr-dark);
+  font-size: 0.9em;
+  margin: 0.5em 0 0 0;
+}
+
+.RepoCard-bottom {
+  display: flex;
+  margin-top: 2em;
+}
+
+.RepoCard-lang {
+  display: flex;
+  align-items: center;
+}
+
+.RepoCard-langColor {
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.25em;
+  border-radius: 50%;
+}
+
+.RepoCard-langName {
+  margin: 0 1.5em 0 0;
+  font-size: 0.75em;
+  color: var(--clr-dark);
+}
+
+.RepoCard-updated {
+  color: var(--clr-dark);
+  font-size: 0.75em;
+}
