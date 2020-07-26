@@ -2,21 +2,23 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import './SearchInput.css'
+import useDebounce from '../../hooks/useDebounce'
 
 const SearchInput = ({repos, setFilteredRepos}) => {
   const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query, 500)
 
   useEffect(() => {
-    if (query !== '') {
+    if (debouncedQuery !== '') {
       const newRepos = repos.filter((repo) => {
-        return repo.name.toLowerCase().includes(query.toLowerCase())
+        return repo.name.toLowerCase().includes(debouncedQuery.toLowerCase())
       })
 
       setFilteredRepos(newRepos)
     } else {
       setFilteredRepos(repos)
     }
-  }, [query, repos, setFilteredRepos])
+  }, [debouncedQuery, repos, setFilteredRepos])
 
   const handleChange = (e) => {
     const userInput = e.target.value

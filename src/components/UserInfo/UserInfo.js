@@ -7,9 +7,11 @@ const UserInfo = ({userInfo: {login, avatarUrl, bio, name}}) => {
   return (
     <section className="UserInfo-container">
       <img className="UserInfo-img" src={avatarUrl} alt={`${name}'s avatar`} />
-      <h2 className="UserInfo-name">{name}</h2>
-      <p className="UserInfo-login">{login}</p>
-      <p className="UserInfo-bio">{bio}</p>
+      <div>
+        <h2 className="UserInfo-name">{name}</h2>
+        <p className="UserInfo-login">{login}</p>
+        <p className="UserInfo-bio">{bio}</p>
+      </div>
     </section>
   )
 }

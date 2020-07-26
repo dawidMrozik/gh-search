@@ -3,6 +3,7 @@
   flex-direction: column;
   border-bottom: 1px solid #ccc;
   padding: 1em 0;
+  width: 100%;
 }
 
 .RepoCard-name {
