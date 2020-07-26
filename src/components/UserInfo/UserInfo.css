@@ -1,17 +1,17 @@
 .UserInfo-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 800px;
+  width: 100%;
+  max-width: 600px;
   color: var(--clr-dark);
+  margin-bottom: 3em;
 }
 
 .UserInfo-img {
   border-radius: 50%;
-  margin-bottom: 1.5em;
-  width: 75vw;
-  max-width: 300px;
+  margin-right: 1em;
+  width: 7rem;
 }
 
 .UserInfo-name {
@@ -30,4 +30,18 @@
   padding: 0 1.5em;
   line-height: 1.5;
   font-size: 0.75em;
+}
+
+@media (min-width: 1000px) {
+  .UserInfo-container {
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    margin: 0;
+  }
+
+  .UserInfo-img {
+    width: 20rem;
+    margin-bottom: 2em;
+  }
 }
