@@ -6,7 +6,7 @@ import UserInfo from '../UserInfo'
 import Loader from '../Loader'
 import Error from '../Error'
 
-const GET_USER_INFO_QUERY = gql`
+export const GET_USER_INFO_QUERY = gql`
   query GetRepositories($endCursor: String) {
     viewer {
       login

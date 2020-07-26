@@ -38,7 +38,7 @@ const RepoCard = ({repo}) => {
   }
 
   return (
-    <div className="RepoCard-container">
+    <li className="RepoCard-container">
       <div className="RepoCard-header">
         <a className="RepoCard-name" href={url}>
           {name}
@@ -58,7 +58,7 @@ const RepoCard = ({repo}) => {
           {`Updated ${formatDate(updatedAt)}`}
         </div>
       </div>
-    </div>
+    </li>
   )
 }
 
