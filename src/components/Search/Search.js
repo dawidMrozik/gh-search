@@ -1,43 +1,38 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
+
+import './Search.css'
 import SearchInput from '../SearchInput'
 import RepoCards from '../RepoCards'
 
-const Search = ({data, fetchMore}) => {
-  const repoList = data.viewer.repositories.nodes
-  const {startCursor} = data.viewer.repositories.pageInfo
-  const {hasPreviousPage} = data.viewer.repositories.pageInfo
-  const [repos] = useState(repoList)
-  const [filteredRepos, setFilteredRepos] = useState(repos)
+const Search = ({repositories: {nodes, pageInfo}, fetchMore}) => {
+  const {endCursor, hasNextPage} = pageInfo
+  const [filteredRepos, setFilteredRepos] = useState(nodes)
 
   return (
-    <div>
-      <SearchInput repos={repos} setFilteredRepos={setFilteredRepos} />
+    <section className="Search-container">
+      <SearchInput repos={nodes} setFilteredRepos={setFilteredRepos} />
       <RepoCards
         repos={filteredRepos}
         fetchMore={fetchMore}
-        startCursor={startCursor}
-        hasPreviousPage={hasPreviousPage}
+        endCursor={endCursor}
+        hasNextPage={hasNextPage}
       />
-    </div>
+    </section>
   )
 }
 
 Search.propTypes = {
-  data: PropTypes.shape({
-    viewer: PropTypes.shape({
-      repositories: PropTypes.shape({
-        nodes: PropTypes.arrayOf(
-          PropTypes.shape({
-            id: PropTypes.string,
-            name: PropTypes.string,
-          }),
-        ),
-        pageInfo: PropTypes.shape({
-          startCursor: PropTypes.string,
-          hasPreviousPage: PropTypes.bool,
-        }),
+  repositories: PropTypes.shape({
+    nodes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
       }),
+    ),
+    pageInfo: PropTypes.shape({
+      endCursor: PropTypes.string,
+      hasNextPage: PropTypes.bool,
     }),
   }).isRequired,
   fetchMore: PropTypes.func.isRequired,

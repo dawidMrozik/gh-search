@@ -1,16 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import './RepoCards.css'
 import RepoCard from '../RepoCard'
 import FetchMoreButton from '../FetchMoreButton'
 
-const RepoCards = ({repos, fetchMore, startCursor, hasPreviousPage}) => {
+const RepoCards = ({repos, fetchMore, endCursor, hasNextPage}) => {
   return (
-    <div>
+    <div className="RepoCards-container">
       {repos.map((repo) => (
         <RepoCard repo={repo} key={repo.id} />
       ))}
-      {hasPreviousPage && (
-        <FetchMoreButton fetchMore={fetchMore} startCursor={startCursor} />
+      {hasNextPage && (
+        <FetchMoreButton fetchMore={fetchMore} endCursor={endCursor} />
       )}
     </div>
   )
@@ -24,8 +26,8 @@ RepoCards.propTypes = {
     }),
   ).isRequired,
   fetchMore: PropTypes.func.isRequired,
-  startCursor: PropTypes.string.isRequired,
-  hasPreviousPage: PropTypes.bool.isRequired,
+  endCursor: PropTypes.string.isRequired,
+  hasNextPage: PropTypes.bool.isRequired,
 }
 
 export default RepoCards

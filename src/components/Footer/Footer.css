@@ -1,0 +1,13 @@
+.Footer-container {
+  background-color: var(--clr-dark);
+  color: var(--clr-bright);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+  height: 6em;
+}
+
+.Footer-author {
+  font-size: 0.75em;
+}
