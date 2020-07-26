@@ -7,14 +7,14 @@ import FetchMoreButton from '../FetchMoreButton'
 
 const RepoCards = ({repos, fetchMore, endCursor, hasNextPage}) => {
   return (
-    <div className="RepoCards-container">
+    <ul className="RepoCards-container">
       {repos.map((repo) => (
         <RepoCard repo={repo} key={repo.id} />
       ))}
       {hasNextPage && (
         <FetchMoreButton fetchMore={fetchMore} endCursor={endCursor} />
       )}
-    </div>
+    </ul>
   )
 }
 
