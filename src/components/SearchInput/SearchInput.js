@@ -4,6 +4,14 @@ import PropTypes from 'prop-types'
 import './SearchInput.css'
 import useDebounce from '../../hooks/useDebounce'
 
+/**
+ * Repository search input. Based on provided query it filters list of shown repos.
+ *
+ * @component
+ * @example
+ * return <SearchInput repos={repos} setFilteredRepos={setFilteredRepos} />
+ */
+
 const SearchInput = ({repos, setFilteredRepos}) => {
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query, 500)
@@ -38,12 +46,18 @@ const SearchInput = ({repos, setFilteredRepos}) => {
 }
 
 SearchInput.propTypes = {
+  /**
+   * Original list of viewer's repos to reference it while filtering.
+   */
   repos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
     }),
   ).isRequired,
+  /**
+   * FilteredRepos setter from useState hook.
+   */
   setFilteredRepos: PropTypes.func.isRequired,
 }
 

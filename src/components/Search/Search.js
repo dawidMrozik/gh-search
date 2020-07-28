@@ -5,6 +5,14 @@ import './Search.css'
 import SearchInput from '../SearchInput'
 import RepoCards from '../RepoCards'
 
+/**
+ * Repository search wrapper.
+ *
+ * @component
+ * @example
+ * return <Search repositories={repositories} fetchMore={fetchMore} />
+ */
+
 const Search = ({repositories: {nodes, pageInfo}, fetchMore}) => {
   const {endCursor, hasNextPage} = pageInfo
   const [filteredRepos, setFilteredRepos] = useState(nodes)
@@ -23,6 +31,9 @@ const Search = ({repositories: {nodes, pageInfo}, fetchMore}) => {
 }
 
 Search.propTypes = {
+  /**
+   * Fetched data about viewer's repos.
+   */
   repositories: PropTypes.shape({
     nodes: PropTypes.arrayOf(
       PropTypes.shape({
@@ -35,6 +46,9 @@ Search.propTypes = {
       hasNextPage: PropTypes.bool,
     }),
   }).isRequired,
+  /**
+   * Function destructured from apollo-client's useQuery function. Passed to the RepoCards component and then to the FetchMoreButton component.
+   */
   fetchMore: PropTypes.func.isRequired,
 }
 

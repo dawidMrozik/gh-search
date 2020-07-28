@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import './FetchMoreButton.css'
 
+// updateQuery tells apollo-client how to merge new data with the old one
 const updateQuery = (previousResult, {fetchMoreResult}) => {
   if (!fetchMoreResult) {
     return previousResult
@@ -24,6 +25,16 @@ const updateQuery = (previousResult, {fetchMoreResult}) => {
   }
 }
 
+/**
+ * Button for loading more data
+ *
+ * @component
+ * @example
+ * return (
+ *   <FetchMoreButton fetchMore={fetchMore} endCursor={endCursor} />
+ * )
+ */
+
 const FetchMoreButton = ({fetchMore, endCursor}) => {
   const loadMoreRepos = () => {
     fetchMore({
@@ -44,7 +55,13 @@ const FetchMoreButton = ({fetchMore, endCursor}) => {
 }
 
 FetchMoreButton.propTypes = {
+  /**
+   * Function destructured from apollo-client's useQuery function.
+   */
   fetchMore: PropTypes.func.isRequired,
+  /**
+   * endCursor from fetched data list. It tells from which listitem fetch next data.
+   */
   endCursor: PropTypes.string.isRequired,
 }
 

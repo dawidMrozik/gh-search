@@ -18,7 +18,7 @@ describe('RepoCards', () => {
     expect(screen.getByRole('list')).toBeInTheDocument()
   })
 
-  test('calls the onClickcallback handler', async () => {
+  test('calls the onClick callback handler', async () => {
     const fetchMore = jest.fn()
 
     render(

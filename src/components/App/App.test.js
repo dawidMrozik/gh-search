@@ -2,21 +2,16 @@ import React from 'react'
 import {render, screen} from '@testing-library/react'
 import {MockedProvider} from '@apollo/client/testing'
 
-import App, {GET_USER_INFO_QUERY} from './App'
+import App, {GET_REPOSITORY_QUERY} from './App'
 
 const mocks = [
   {
     request: {
-      query: GET_USER_INFO_QUERY,
+      query: GET_REPOSITORY_QUERY,
     },
     result: {
       data: {
         viewer: {
-          login: 'dawidMrozik',
-          avatarUrl:
-            'https://avatars1.githubusercontent.com/u/32874009?u=80a3a249da4907b59ba6bbfdc23844217f2d53dd&v=4',
-          name: 'Dawid Mrozik',
-          bio: '',
           repositories: {
             pageInfo: {
               endCursor:

@@ -6,7 +6,7 @@ import UserInfo from '../UserInfo'
 import Loader from '../Loader'
 import Error from '../Error'
 
-export const GET_USER_INFO_QUERY = gql`
+export const GET_REPOSITORY_QUERY = gql`
   query GetRepositories($endCursor: String) {
     viewer {
       login
@@ -39,8 +39,14 @@ export const GET_USER_INFO_QUERY = gql`
   }
 `
 
+/**
+ * App wrapper. It exectues graphql query to the github API and provides data to child components.
+ *
+ * @component
+ */
+
 const App = () => {
-  const {loading, error, data, fetchMore} = useQuery(GET_USER_INFO_QUERY, {
+  const {loading, error, data, fetchMore} = useQuery(GET_REPOSITORY_QUERY, {
     notifyOnNetworkStatusChange: true,
   })
 
@@ -48,12 +54,12 @@ const App = () => {
   if (error) return <Error error={error} />
 
   const {
-    viewer: {repositories, ...userInfo},
+    viewer: {repositories},
   } = data
 
   return (
     <>
-      <UserInfo userInfo={userInfo} />
+      <UserInfo />
       <Search repositories={repositories} fetchMore={fetchMore} />
     </>
   )

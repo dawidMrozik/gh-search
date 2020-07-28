@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> RepoCard/RepoCard.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">gh-search docs</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>RepoCard/RepoCard.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import PropTypes from 'prop-types'
+
+import './RepoCard.css'
+
+const formatDate = (date) => {
+  const now = new Date()
+  const diffInMs = now - new Date(date)
+  const days = Math.floor(diffInMs / 1000 / 60 / (60 * 24))
+  const diffDate = new Date(diffInMs)
+
+  if (days > 0) return `${days} days ago`
+  if (diffDate.getHours() > 0) return `${diffDate.getHours()} days ago`
+  if (diffDate.getMinutes() > 0) return `${diffDate.getMinutes()} days ago`
+
+  return `just now`
+}
+
+/**
+ * Single repository card.
+ *
+ * @component
+ * @example
+ * const repo = {
+ *    id: 1,
+ *    name: 'John Smith',
+ *    shortDescriptionHTML: 'front-end developer',
+ *    updatedAt: '2020-07-28T07:29:29.503Z',
+ *    url: 'github.com/johnSmith/example-repo'
+ *    primaryLanguage: {
+ *        name: 'JavaScript',
+ *        color: '#f1e05a',
+ *    })
+ *    isPrivate: false
+ * }
+ *
+ * return &lt;RepoCard repo={repo} />
+ */
+
+const RepoCard = ({repo}) => {
+  const {
+    name,
+    shortDescriptionHTML,
+    updatedAt,
+    isPrivate,
+    url,
+    primaryLanguage,
+  } = repo
+  let mainLang
+  let mainLangColor
+
+  // handle empty primaryLanguage
+  if (primaryLanguage) {
+    mainLang = primaryLanguage.name
+    mainLangColor = primaryLanguage.color
+  } else {
+    mainLang = 'None'
+    mainLangColor = '#ddd'
+  }
+
+  return (
+    &lt;li className="RepoCard-container">
+      &lt;div className="RepoCard-header">
+        &lt;a className="RepoCard-name" href={url}>
+          {name}
+        &lt;/a>
+        {isPrivate &amp;&amp; &lt;div className="RepoCard-privateBadge">Private&lt;/div>}
+      &lt;/div>
+      &lt;p className="RepoCard-desc">{shortDescriptionHTML}&lt;/p>
+      &lt;div className="RepoCard-bottom">
+        &lt;div className="RepoCard-lang">
+          &lt;div
+            className="RepoCard-langColor"
+            style={{backgroundColor: mainLangColor}}
+          />
+          &lt;p className="RepoCard-langName">{mainLang}&lt;/p>
+        &lt;/div>
+        &lt;div className="RepoCard-updated">
+          {`Updated ${formatDate(updatedAt)}`}
+        &lt;/div>
+      &lt;/div>
+    &lt;/li>
+  )
+}
+
+RepoCard.propTypes = {
+  /**
+   * Single repository object.
+   */
+  repo: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    shortDescriptionHTML: PropTypes.string,
+    updatedAt: PropTypes.string,
+    url: PropTypes.string,
+    primaryLanguage: PropTypes.shape({
+      name: PropTypes.string,
+      color: PropTypes.string,
+    }),
+    isPrivate: PropTypes.bool,
+  }).isRequired,
+}
+
+export default RepoCard
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
