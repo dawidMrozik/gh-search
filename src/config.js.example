@@ -1,0 +1,4 @@
+// Make sure you renamed that file to config.js
+const token = 'INSERT YOUR GITHUB TOKEN HERE'
+
+export default token

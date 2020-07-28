@@ -1,0 +1,13 @@
+.MainTemplate-main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  .MainTemplate-main {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+import './index.css'
 import Home from './views/Home'
+import ApolloCustomProvider from './ApolloCustomProvider'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <ApolloCustomProvider>
+      <Home />
+    </ApolloCustomProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )
