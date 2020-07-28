@@ -3,6 +3,8 @@
 Github repository serach app bulit with React, Apollo-Client and Github v4
 GraphQL API.
 
+## Before running make sure to rename config.js.example to config.js and provide your own Github Access Token. You can find instruction [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
+
 ## Available Scripts
 
 In the project directory, you can run:
