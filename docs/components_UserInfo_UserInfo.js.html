@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Search/Search.js</title>
+  <title> components/UserInfo/UserInfo.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>Search/Search.js</h1>
+                    <h1>components/UserInfo/UserInfo.js</h1>
                 </header>
                 
 
@@ -89,61 +89,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, {useState} from 'react'
+            <pre class="prettyprint source linenums"><code>import React from 'react'
 import PropTypes from 'prop-types'
 
-import './Search.css'
-import SearchInput from '../SearchInput'
-import RepoCards from '../RepoCards'
+import './UserInfo.css'
 
 /**
- * Repository search wrapper.
+ * Card that displays informations about the viewer.
  *
  * @component
- * @example
- * return &lt;Search repositories={repositories} fetchMore={fetchMore} />
  */
 
-const Search = ({repositories: {nodes, pageInfo}, fetchMore}) => {
-  const {endCursor, hasNextPage} = pageInfo
-  const [filteredRepos, setFilteredRepos] = useState(nodes)
+const UserInfo = ({userInfo: {login, avatarUrl, bio, name}}) => {
+  const truncate = (str, n) => {
+    return str.length > n ? `${str.substr(0, n - 1)}...` : str
+  }
 
   return (
-    &lt;section className="Search-container">
-      &lt;SearchInput repos={nodes} setFilteredRepos={setFilteredRepos} />
-      &lt;RepoCards
-        repos={filteredRepos}
-        fetchMore={fetchMore}
-        endCursor={endCursor}
-        hasNextPage={hasNextPage}
-      />
+    &lt;section className="UserInfo-container">
+      &lt;img className="UserInfo-img" src={avatarUrl} alt={`${name}'s avatar`} />
+      &lt;div className="UserInfo-infoWrapper">
+        &lt;h2 className="UserInfo-name">{name}&lt;/h2>
+        &lt;p className="UserInfo-login">{login}&lt;/p>
+        &lt;p className="UserInfo-bio">{truncate(bio, 100)}&lt;/p>
+      &lt;/div>
     &lt;/section>
   )
 }
 
-Search.propTypes = {
+UserInfo.propTypes = {
   /**
-   * Fetched data about viewer's repos.
+   * Data about the viewer.
    */
-  repositories: PropTypes.shape({
-    nodes: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        name: PropTypes.string,
-      }),
-    ),
-    pageInfo: PropTypes.shape({
-      endCursor: PropTypes.string,
-      hasNextPage: PropTypes.bool,
-    }),
+  userInfo: PropTypes.shape({
+    login: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    bio: PropTypes.string,
+    name: PropTypes.string,
   }).isRequired,
-  /**
-   * Function destructured from apollo-client's useQuery function. Passed to the RepoCards component and then to the FetchMoreButton component.
-   */
-  fetchMore: PropTypes.func.isRequired,
 }
 
-export default Search
+export default UserInfo
 </code></pre>
         </article>
     </section>

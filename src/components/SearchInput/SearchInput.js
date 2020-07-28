@@ -8,8 +8,6 @@ import useDebounce from '../../hooks/useDebounce'
  * Repository search input. Based on provided query it filters list of shown repos.
  *
  * @component
- * @example
- * return <SearchInput repos={repos} setFilteredRepos={setFilteredRepos} />
  */
 
 const SearchInput = ({repos, setFilteredRepos}) => {

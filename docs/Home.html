@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> RepoCard/RepoCard.js</title>
+  <title> Home</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,130 +70,172 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>RepoCard/RepoCard.js</h1>
+                    <p>Components</p>
+                    <h1>Home</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'
-import PropTypes from 'prop-types'
+        <h2>
+            &ltHome  /&gt
+        </h2>
+        
+    
+</header>
 
-import './RepoCard.css'
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
 
-const formatDate = (date) => {
-  const now = new Date()
-  const diffInMs = now - new Date(date)
-  const days = Math.floor(diffInMs / 1000 / 60 / (60 * 24))
-  const diffDate = new Date(diffInMs)
 
-  if (days > 0) return `${days} days ago`
-  if (diffDate.getHours() > 0) return `${diffDate.getHours()} days ago`
-  if (diffDate.getMinutes() > 0) return `${diffDate.getMinutes()} days ago`
+    
+    <h4 class="name" id="Home">
+        <a class="href-link" href="#Home">#</a>
+        
+        <span class="code-name">
+            
+                &ltHome  /&gt
+            
+        </span>
+    </h4>
+    
 
-  return `just now`
-}
+    
+    
+    <div class="description">
+        <p>VIEW:
+Landing view which uses MainTemplate and passes App component as a children.</p>
+    </div>
+    
 
-/**
- * Single repository card.
- *
- * @component
- * @example
- * const repo = {
- *    id: 1,
- *    name: 'John Smith',
- *    shortDescriptionHTML: 'front-end developer',
- *    updatedAt: '2020-07-28T07:29:29.503Z',
- *    url: 'github.com/johnSmith/example-repo'
- *    primaryLanguage: {
- *        name: 'JavaScript',
- *        color: '#f1e05a',
- *    })
- *    isPrivate: false
- * }
- *
- * return &lt;RepoCard repo={repo} />
- */
 
-const RepoCard = ({repo}) => {
-  const {
-    name,
-    shortDescriptionHTML,
-    updatedAt,
-    isPrivate,
-    url,
-    primaryLanguage,
-  } = repo
-  let mainLang
-  let mainLangColor
 
-  // handle empty primaryLanguage
-  if (primaryLanguage) {
-    mainLang = primaryLanguage.name
-    mainLangColor = primaryLanguage.color
-  } else {
-    mainLang = 'None'
-    mainLangColor = '#ddd'
-  }
 
-  return (
-    &lt;li className="RepoCard-container">
-      &lt;div className="RepoCard-header">
-        &lt;a className="RepoCard-name" href={url}>
-          {name}
-        &lt;/a>
-        {isPrivate &amp;&amp; &lt;div className="RepoCard-privateBadge">Private&lt;/div>}
-      &lt;/div>
-      &lt;p className="RepoCard-desc">{shortDescriptionHTML}&lt;/p>
-      &lt;div className="RepoCard-bottom">
-        &lt;div className="RepoCard-lang">
-          &lt;div
-            className="RepoCard-langColor"
-            style={{backgroundColor: mainLangColor}}
-          />
-          &lt;p className="RepoCard-langName">{mainLang}&lt;/p>
-        &lt;/div>
-        &lt;div className="RepoCard-updated">
-          {`Updated ${formatDate(updatedAt)}`}
-        &lt;/div>
-      &lt;/div>
-    &lt;/li>
-  )
-}
 
-RepoCard.propTypes = {
-  /**
-   * Single repository object.
-   */
-  repo: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    shortDescriptionHTML: PropTypes.string,
-    updatedAt: PropTypes.string,
-    url: PropTypes.string,
-    primaryLanguage: PropTypes.shape({
-      name: PropTypes.string,
-      color: PropTypes.string,
-    }),
-    isPrivate: PropTypes.bool,
-  }).isRequired,
-}
 
-export default RepoCard
-</code></pre>
-        </article>
-    </section>
+
+    
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="views_Home.js.html" class="button">View Source</a>
+            <span>
+                <a href="views_Home.js.html">views/Home.js</a>, <a href="views_Home.js.html#line13">line 13</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+        
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

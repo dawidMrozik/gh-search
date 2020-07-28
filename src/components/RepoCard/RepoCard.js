@@ -20,21 +20,6 @@ const formatDate = (date) => {
  * Single repository card.
  *
  * @component
- * @example
- * const repo = {
- *    id: 1,
- *    name: 'John Smith',
- *    shortDescriptionHTML: 'front-end developer',
- *    updatedAt: '2020-07-28T07:29:29.503Z',
- *    url: 'github.com/johnSmith/example-repo'
- *    primaryLanguage: {
- *        name: 'JavaScript',
- *        color: '#f1e05a',
- *    })
- *    isPrivate: false
- * }
- *
- * return <RepoCard repo={repo} />
  */
 
 const RepoCard = ({repo}) => {

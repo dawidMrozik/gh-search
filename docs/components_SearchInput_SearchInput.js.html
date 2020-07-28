@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> App/App.js</title>
+  <title> components/SearchInput/SearchInput.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>App/App.js</h1>
+                    <h1>components/SearchInput/SearchInput.js</h1>
                 </header>
                 
 
@@ -89,74 +89,68 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'
-import {useQuery, gql} from '@apollo/client'
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react'
+import PropTypes from 'prop-types'
 
-import Search from '../Search'
-import UserInfo from '../UserInfo'
-import Loader from '../Loader'
-import Error from '../Error'
-
-export const GET_USER_INFO_QUERY = gql`
-  query GetRepositories($endCursor: String) {
-    viewer {
-      login
-      avatarUrl
-      name
-      bio
-      repositories(
-        first: 10
-        after: $endCursor
-        orderBy: {field: UPDATED_AT, direction: DESC}
-      ) {
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-        nodes {
-          id
-          name
-          updatedAt
-          shortDescriptionHTML
-          isPrivate
-          url
-          primaryLanguage {
-            color
-            name
-          }
-        }
-      }
-    }
-  }
-`
+import './SearchInput.css'
+import useDebounce from '../../hooks/useDebounce'
 
 /**
- * App wrapper. It exectues graphql query to the github API and provides data to child components.
+ * Repository search input. Based on provided query it filters list of shown repos.
  *
  * @component
  */
 
-const App = () => {
-  const {loading, error, data, fetchMore} = useQuery(GET_USER_INFO_QUERY, {
-    notifyOnNetworkStatusChange: true,
-  })
+const SearchInput = ({repos, setFilteredRepos}) => {
+  const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query, 500)
 
-  if (loading) return &lt;Loader />
-  if (error) return &lt;Error error={error} />
+  useEffect(() => {
+    if (debouncedQuery !== '') {
+      const newRepos = repos.filter((repo) => {
+        return repo.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+      })
 
-  const {
-    viewer: {repositories, ...userInfo},
-  } = data
+      setFilteredRepos(newRepos)
+    } else {
+      setFilteredRepos(repos)
+    }
+  }, [debouncedQuery, repos, setFilteredRepos])
+
+  const handleChange = (e) => {
+    const userInput = e.target.value
+    setQuery(userInput)
+  }
 
   return (
-    &lt;>
-      &lt;UserInfo userInfo={userInfo} />
-      &lt;Search repositories={repositories} fetchMore={fetchMore} />
-    &lt;/>
+    &lt;input
+      className="SearchInput-input"
+      placeholder="Find a repository..."
+      aria-label="Find a repository..."
+      type="search"
+      value={query}
+      onChange={handleChange}
+    />
   )
 }
 
-export default App
+SearchInput.propTypes = {
+  /**
+   * Original list of viewer's repos to reference it while filtering.
+   */
+  repos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  ).isRequired,
+  /**
+   * FilteredRepos setter from useState hook.
+   */
+  setFilteredRepos: PropTypes.func.isRequired,
+}
+
+export default SearchInput
 </code></pre>
         </article>
     </section>

@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Error/Error.js</title>
+  <title> components/Loader/Loader.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>Error/Error.js</h1>
+                    <h1>components/Loader/Loader.js</h1>
                 </header>
                 
 
@@ -90,61 +90,34 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import PropTypes from 'prop-types'
 
-import './Error.css'
+import './Loader.css'
 
 /**
- * Error showing component
+ * Full screen loader.
  *
  * @component
- * @example
- * const error = {
- *    message: 'Not authorized',
- *    newtworkError: { statusCode: 401 }
- * }
- * return (
- *   &lt;Error error={error} />
- * )
  */
-const Error = ({
-  error: {
-    message,
-    networkError: {statusCode},
-  },
-}) => {
+
+const Loader = () => {
   return (
-    &lt;div className="Error-container">
-      &lt;h2>{message}&lt;/h2>
-      {statusCode === 401 &amp;&amp; (
-        &lt;code>Make sure you provided correct token in config.js&lt;/code>
-      )}
+    &lt;div className="Loader-container">
+      &lt;div
+        className="Loader-loader"
+        role="alert"
+        aria-busy="true"
+        data-testid="loader"
+      >
+        &lt;div />
+        &lt;div />
+        &lt;div />
+        &lt;div />
+      &lt;/div>
     &lt;/div>
   )
 }
 
-Error.propTypes = {
-  /**
-   * Error object provided from apollo-client query execution
-   */
-  error: PropTypes.shape({
-    message: PropTypes.string,
-    networkError: PropTypes.shape({
-      statusCode: PropTypes.number,
-    }),
-  }),
-}
-
-Error.defaultProps = {
-  error: {
-    message: 'Something went wrong :(',
-    networkError: {
-      statusCode: 0,
-    },
-  },
-}
-
-export default Error
+export default Loader
 </code></pre>
         </article>
     </section>

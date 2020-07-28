@@ -37,20 +37,26 @@ reactComponents['Footer'] = Component3;
 import Component4 from '../src/components/Header/Header.js';
 reactComponents['Header'] = Component4;
 
-import Component5 from '../src/components/Loader/Loader.js';
-reactComponents['Loader'] = Component5;
+import Component5 from '../src/views/Home.js';
+reactComponents['Home'] = Component5;
 
-import Component6 from '../src/components/RepoCard/RepoCard.js';
-reactComponents['RepoCard'] = Component6;
+import Component6 from '../src/components/Loader/Loader.js';
+reactComponents['Loader'] = Component6;
 
-import Component7 from '../src/components/RepoCards/RepoCards.js';
-reactComponents['RepoCards'] = Component7;
+import Component7 from '../src/templates/MainTemplate.js';
+reactComponents['MainTemplate'] = Component7;
 
-import Component8 from '../src/components/Search/Search.js';
-reactComponents['Search'] = Component8;
+import Component8 from '../src/components/RepoCard/RepoCard.js';
+reactComponents['RepoCard'] = Component8;
 
-import Component9 from '../src/components/SearchInput/SearchInput.js';
-reactComponents['SearchInput'] = Component9;
+import Component9 from '../src/components/RepoCards/RepoCards.js';
+reactComponents['RepoCards'] = Component9;
 
-import Component10 from '../src/components/UserInfo/UserInfo.js';
-reactComponents['UserInfo'] = Component10;
+import Component10 from '../src/components/Search/Search.js';
+reactComponents['Search'] = Component10;
+
+import Component11 from '../src/components/SearchInput/SearchInput.js';
+reactComponents['SearchInput'] = Component11;
+
+import Component12 from '../src/components/UserInfo/UserInfo.js';
+reactComponents['UserInfo'] = Component12;

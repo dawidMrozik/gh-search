@@ -29,10 +29,6 @@ const updateQuery = (previousResult, {fetchMoreResult}) => {
  * Button for loading more data
  *
  * @component
- * @example
- * return (
- *   <FetchMoreButton fetchMore={fetchMore} endCursor={endCursor} />
- * )
  */
 
 const FetchMoreButton = ({fetchMore, endCursor}) => {

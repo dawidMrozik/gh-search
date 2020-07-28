@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> SearchInput/SearchInput.js</title>
+  <title> MainTemplate</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,90 +70,203 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>SearchInput/SearchInput.js</h1>
+                    <p>Components</p>
+                    <h1>MainTemplate</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react'
-import PropTypes from 'prop-types'
+        <h2>
+            &ltMainTemplate <i>children</i> /&gt
+        </h2>
+        
+    
+</header>
 
-import './SearchInput.css'
-import useDebounce from '../../hooks/useDebounce'
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
 
-/**
- * Repository search input. Based on provided query it filters list of shown repos.
- *
- * @component
- * @example
- * return &lt;SearchInput repos={repos} setFilteredRepos={setFilteredRepos} />
- */
 
-const SearchInput = ({repos, setFilteredRepos}) => {
-  const [query, setQuery] = useState('')
-  const debouncedQuery = useDebounce(query, 500)
+    
+    <h4 class="name" id="MainTemplate">
+        <a class="href-link" href="#MainTemplate">#</a>
+        
+        <span class="code-name">
+            
+                &ltMainTemplate <i>children</i> /&gt
+            
+        </span>
+    </h4>
+    
 
-  useEffect(() => {
-    if (debouncedQuery !== '') {
-      const newRepos = repos.filter((repo) => {
-        return repo.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-      })
+    
+    
+    <div class="description">
+        <p>TEMPLATE:
+Main template that adds Header and Footer and puts children prop in the main tag.</p>
+    </div>
+    
 
-      setFilteredRepos(newRepos)
-    } else {
-      setFilteredRepos(repos)
-    }
-  }, [debouncedQuery, repos, setFilteredRepos])
 
-  const handleChange = (e) => {
-    const userInput = e.target.value
-    setQuery(userInput)
-  }
 
-  return (
-    &lt;input
-      className="SearchInput-input"
-      placeholder="Find a repository..."
-      aria-label="Find a repository..."
-      type="search"
-      value={query}
-      onChange={handleChange}
-    />
-  )
-}
 
-SearchInput.propTypes = {
-  /**
-   * Original list of viewer's repos to reference it while filtering.
-   */
-  repos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-    }),
-  ).isRequired,
-  /**
-   * FilteredRepos setter from useState hook.
-   */
-  setFilteredRepos: PropTypes.func.isRequired,
-}
 
-export default SearchInput
-</code></pre>
-        </article>
-    </section>
+
+
+    
+        <h5>PropTypes:</h5>
+        
+<div class="table-container">
+  <table class="params table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+        <th class="last">Default</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+          <tr class="deep-level-0">
+            <td class="name"><code>children</code></td>
+            <td>
+              node
+            </td>
+            <td>Yes</td>
+            <td>Single node.</td>
+            <td></td>
+          </tr>
+          
+    
+    </tbody>
+  </table>
+</div>
+    
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="templates_MainTemplate.js.html" class="button">View Source</a>
+            <span>
+                <a href="templates_MainTemplate.js.html">templates/MainTemplate.js</a>, <a href="templates_MainTemplate.js.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+        
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

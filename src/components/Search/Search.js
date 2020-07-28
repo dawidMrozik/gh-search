@@ -9,8 +9,6 @@ import RepoCards from '../RepoCards'
  * Repository search wrapper.
  *
  * @component
- * @example
- * return <Search repositories={repositories} fetchMore={fetchMore} />
  */
 
 const Search = ({repositories: {nodes, pageInfo}, fetchMore}) => {

@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> UserInfo/UserInfo.js</title>
+  <title> components/App/App.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>UserInfo/UserInfo.js</h1>
+                    <h1>components/App/App.js</h1>
                 </header>
                 
 
@@ -90,50 +90,73 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import PropTypes from 'prop-types'
+import {useQuery, gql} from '@apollo/client'
 
-import './UserInfo.css'
+import Search from '../Search'
+import UserInfo from '../UserInfo'
+import Loader from '../Loader'
+import Error from '../Error'
+
+export const GET_REPOSITORY_QUERY = gql`
+  query GetRepositories($endCursor: String) {
+    viewer {
+      login
+      avatarUrl
+      name
+      bio
+      repositories(
+        first: 10
+        after: $endCursor
+        orderBy: {field: UPDATED_AT, direction: DESC}
+      ) {
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+        nodes {
+          id
+          name
+          updatedAt
+          shortDescriptionHTML
+          isPrivate
+          url
+          primaryLanguage {
+            color
+            name
+          }
+        }
+      }
+    }
+  }
+`
 
 /**
- * Card that displays informations about the viewer.
+ * App wrapper. It exectues graphql query to the github API and provides data to child components.
  *
  * @component
- * @example
- * const userInfo = {
- *    login: 'johnSmith',
- *    avatarUrl: 'http://link-to-image.com',
- *    bio: 'example bio',
- *    name: 'John Smith'
- * }
- * return &lt;UserInfo userInfo={userInfo} />
  */
 
-const UserInfo = ({userInfo: {login, avatarUrl, bio, name}}) => {
+const App = () => {
+  const {loading, error, data, fetchMore} = useQuery(GET_REPOSITORY_QUERY, {
+    notifyOnNetworkStatusChange: true,
+  })
+
+  if (loading) return &lt;Loader />
+  if (error) return &lt;Error error={error} />
+
+  const {
+    viewer: {repositories, ...userInfo},
+  } = data
+
   return (
-    &lt;section className="UserInfo-container">
-      &lt;img className="UserInfo-img" src={avatarUrl} alt={`${name}'s avatar`} />
-      &lt;div>
-        &lt;h2 className="UserInfo-name">{name}&lt;/h2>
-        &lt;p className="UserInfo-login">{login}&lt;/p>
-        &lt;p className="UserInfo-bio">{bio}&lt;/p>
-      &lt;/div>
-    &lt;/section>
+    &lt;>
+      &lt;UserInfo userInfo={userInfo} />
+      &lt;Search repositories={repositories} fetchMore={fetchMore} />
+    &lt;/>
   )
 }
 
-UserInfo.propTypes = {
-  /**
-   * Data about the viewer.
-   */
-  userInfo: PropTypes.shape({
-    login: PropTypes.string,
-    avatarUrl: PropTypes.string,
-    bio: PropTypes.string,
-    name: PropTypes.string,
-  }).isRequired,
-}
-
-export default UserInfo
+export default App
 </code></pre>
         </article>
     </section>

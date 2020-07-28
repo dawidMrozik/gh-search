@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Header/Header.js</title>
+  <title> templates/MainTemplate.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>Header/Header.js</h1>
+                    <h1>templates/MainTemplate.js</h1>
                 </header>
                 
 
@@ -90,23 +90,37 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import './Header.css'
+import PropTypes from 'prop-types'
+
+import './MainTemplate.css'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 /**
- * Header component to use in templates. Example usage in MainTemplate.
+ * TEMPLATE:
+ * Main template that adds Header and Footer and puts children prop in the main tag.
  *
  * @component
  */
 
-const Header = () => {
+const MainTemplate = ({children}) => {
   return (
-    &lt;header className="Header-container">
-      &lt;h1 className="Header-title">gh-search&lt;/h1>
-    &lt;/header>
+    &lt;>
+      &lt;Header />
+      &lt;main className="MainTemplate-main">{children}&lt;/main>
+      &lt;Footer />
+    &lt;/>
   )
 }
 
-export default Header
+MainTemplate.propTypes = {
+  /**
+   * Single node.
+   */
+  children: PropTypes.node.isRequired,
+}
+
+export default MainTemplate
 </code></pre>
         </article>
     </section>

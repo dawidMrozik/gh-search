@@ -6,9 +6,6 @@ import './Loader.css'
  * Full screen loader.
  *
  * @component
- * @example
- * const loading = true
- * if (loading) return <Loader />
  */
 
 const Loader = () => {

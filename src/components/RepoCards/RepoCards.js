@@ -9,8 +9,6 @@ import FetchMoreButton from '../FetchMoreButton'
  * Repository list.
  *
  * @component
- * @example
- * return <RepoCards repos={repos} fetchMore={fetchMore} endCursor={endCursor} hasNextPage={hasNextPage} />
  */
 
 const RepoCards = ({repos, fetchMore, endCursor, hasNextPage}) => {

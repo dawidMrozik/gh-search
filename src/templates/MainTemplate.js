@@ -5,6 +5,13 @@ import './MainTemplate.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
+/**
+ * TEMPLATE:
+ * Main template that adds Header and Footer and puts children prop in the main tag.
+ *
+ * @component
+ */
+
 const MainTemplate = ({children}) => {
   return (
     <>
@@ -16,6 +23,9 @@ const MainTemplate = ({children}) => {
 }
 
 MainTemplate.propTypes = {
+  /**
+   * Single node.
+   */
   children: PropTypes.node.isRequired,
 }
 

@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> App.js</title>
+  <title> components/Footer/Footer.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -44,7 +44,7 @@
             
              
                 <a href="index.html">
-                    <h1 class="navbar-item">My React components</h1>
+                    <h1 class="navbar-item">gh-search docs</h1>
                 </a>
             
         </div>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>App.js</h1>
+                    <h1>components/Footer/Footer.js</h1>
                 </header>
                 
 
@@ -90,73 +90,23 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import {useQuery, gql} from '@apollo/client'
-
-import Search from '../Search'
-import UserInfo from '../UserInfo'
-import Loader from '../Loader'
-import Error from '../Error'
-
-export const GET_USER_INFO_QUERY = gql`
-  query GetRepositories($endCursor: String) {
-    viewer {
-      login
-      avatarUrl
-      name
-      bio
-      repositories(
-        first: 10
-        after: $endCursor
-        orderBy: {field: UPDATED_AT, direction: DESC}
-      ) {
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-        nodes {
-          id
-          name
-          updatedAt
-          shortDescriptionHTML
-          isPrivate
-          url
-          primaryLanguage {
-            color
-            name
-          }
-        }
-      }
-    }
-  }
-`
+import './Footer.css'
 
 /**
- * App wrapper. It exectues graphql query to the github API and provides data to the child components.
+ * Footer component to use in templates. Example usage in MainTemplate.
  *
  * @component
  */
 
-const App = () => {
-  const {loading, error, data, fetchMore} = useQuery(GET_USER_INFO_QUERY, {
-    notifyOnNetworkStatusChange: true,
-  })
-
-  if (loading) return &lt;Loader />
-  if (error) return &lt;Error error={error} />
-
-  const {
-    viewer: {repositories, ...userInfo},
-  } = data
-
+const Footer = () => {
   return (
-    &lt;>
-      &lt;UserInfo userInfo={userInfo} />
-      &lt;Search repositories={repositories} fetchMore={fetchMore} />
-    &lt;/>
+    &lt;footer className="Footer-container">
+      &lt;p className="Footer-author">Dawid Mrozik 2020&lt;/p>
+    &lt;/footer>
   )
 }
 
-export default App
+export default Footer
 </code></pre>
         </article>
     </section>

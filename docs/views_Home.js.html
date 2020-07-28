@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> FetchMoreButton/FetchMoreButton.js</title>
+  <title> views/Home.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Loader.html">Loader</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Error.html">Error</a></li><li><a href="FetchMoreButton.html">FetchMoreButton</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Home.html">Home</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MainTemplate.html">MainTemplate</a></li><li><a href="RepoCard.html">RepoCard</a></li><li><a href="RepoCards.html">RepoCards</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchInput.html">SearchInput</a></li><li><a href="UserInfo.html">UserInfo</a></li></ul></div>
                 
             </nav>
         </div>
@@ -80,7 +80,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>FetchMoreButton/FetchMoreButton.js</h1>
+                    <h1>views/Home.js</h1>
                 </header>
                 
 
@@ -90,73 +90,26 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import PropTypes from 'prop-types'
 
-import './FetchMoreButton.css'
-
-// updateQuery tells apollo-client how to merge new data with the old one
-const updateQuery = (previousResult, {fetchMoreResult}) => {
-  if (!fetchMoreResult) {
-    return previousResult
-  }
-
-  return {
-    ...previousResult,
-    viewer: {
-      ...previousResult.viewer,
-      repositories: {
-        ...previousResult.viewer.repositories,
-        ...fetchMoreResult.viewer.repositories,
-        nodes: [
-          ...previousResult.viewer.repositories.nodes,
-          ...fetchMoreResult.viewer.repositories.nodes,
-        ],
-      },
-    },
-  }
-}
+import MainTeamplate from '../templates/MainTemplate'
+import App from '../components/App'
 
 /**
- * Button for loading more data
+ * VIEW:
+ * Landing view which uses MainTemplate and passes App component as a children.
  *
  * @component
- * @example
- * return (
- *   &lt;FetchMoreButton fetchMore={fetchMore} endCursor={endCursor} />
- * )
  */
 
-const FetchMoreButton = ({fetchMore, endCursor}) => {
-  const loadMoreRepos = () => {
-    fetchMore({
-      variables: {endCursor},
-      updateQuery,
-    })
-  }
-
+const Home = () => {
   return (
-    &lt;button
-      type="button"
-      className="FetchMoreButton-btn"
-      onClick={loadMoreRepos}
-    >
-      Load more
-    &lt;/button>
+    &lt;MainTeamplate>
+      &lt;App />
+    &lt;/MainTeamplate>
   )
 }
 
-FetchMoreButton.propTypes = {
-  /**
-   * Function destructured from apollo-client's useQuery function.
-   */
-  fetchMore: PropTypes.func.isRequired,
-  /**
-   * endCursor from fetched data list. It tells from which listitem fetch next data.
-   */
-  endCursor: PropTypes.string.isRequired,
-}
-
-export default FetchMoreButton
+export default Home
 </code></pre>
         </article>
     </section>

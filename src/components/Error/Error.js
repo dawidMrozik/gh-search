@@ -7,14 +7,6 @@ import './Error.css'
  * Error showing component
  *
  * @component
- * @example
- * const error = {
- *    message: 'Not authorized',
- *    newtworkError: { statusCode: 401 }
- * }
- * return (
- *   <Error error={error} />
- * )
  */
 const Error = ({
   error: {

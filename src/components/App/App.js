@@ -54,12 +54,12 @@ const App = () => {
   if (error) return <Error error={error} />
 
   const {
-    viewer: {repositories},
+    viewer: {repositories, ...userInfo},
   } = data
 
   return (
     <>
-      <UserInfo />
+      <UserInfo userInfo={userInfo} />
       <Search repositories={repositories} fetchMore={fetchMore} />
     </>
   )
